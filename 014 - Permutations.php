@@ -8,13 +8,12 @@ function permutations(string $s): array {
 		for ($i = 0; $i < strlen($str); $i++) {
 			$achar = $str[$i];
 			$rest = (($i > 0) ? substr($str, 0, $i) : "") . ($i < (strlen($str) - 1) ? substr($str, $i + 1) : "");
-			array_reduce($permute($rest), function($carry, $item) use ($achar, &$res) {
-				$res[$achar . $item] = false;
-				return "";
-			});
+			array_push($res, ...array_map(function($val) use ($achar, &$res) {
+				return $achar . $val;
+			}, $permute($rest)));
 		}
 		//echo "RES: " . print_r($res, true) . "\n";
-		return array_keys($res);
+		return array_unique($res);
 	};
 	return $permute($s);
 }
