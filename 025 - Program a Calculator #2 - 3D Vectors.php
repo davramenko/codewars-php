@@ -1,5 +1,7 @@
 <?php
 
+// Program a Calculator #2 - 3D Vectors
+
 class Vector {
 
 	public $i;
